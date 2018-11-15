@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+<!--  -->
+
+{% block content %}
+
+<div class="topnav" id="myTopnav">
+    <a href=" {{ url_for('serv') }}" class="active">HW + Servicios</a>
+    <a href=" {{ url_for('sw') }} ">Software</a>
+    <a href=" {{ url_for('hw') }} ">Hardware</a>
+    <a href=" {{ url_for('index') }} ">Inicio</a>
+    <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+    <p>Asistente De Contratos</p>
+</div>
+<div class="form">
+    <div class="tab-content">
+        <div id="signup">
+            <h1>Estamos Trabajando Aquí</h1>
+            <div class="row">
+                <div class="col-sm-5"></div>
+                <div class="col-sm-2"><img src="{{url_for('static', filename='img/barrier.png')}}" /></div>
+                <div class="col-sm-5"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

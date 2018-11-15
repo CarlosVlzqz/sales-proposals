@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="topnav" id="myTopnav">
+    <a href=" {{ url_for('serv') }} class="active" ">HW + Servicios</a>
+    <a href=" {{ url_for('sw') }} ">Software</a>
+    <a href=" {{ url_for('hw') }} ">Hardware</a>
+    <a href=" {{ url_for('index') }} ">Inicio</a>
+    <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+    <p>Asistente De Contratos</p>
+</div>
+<main>
+    <div class="container">
+        <h2>Selecciona los servicios aplicables</h2>
+        <form action="/check" method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3">{{ form.serv1.label}}</div>
+                <div class="col-sm-3">{{ form.serv1(value="True", class="check") }}</div>
+                <div class="col-sm-3"></div>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3">{{ form.serv2.label}}</div>
+                <div class="col-sm-3">{{ form.serv2(value="True",class="check") }}</div>
+                <div class="col-sm-3"></div>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3">{{ form.serv3.label}}</div>
+                <div class="col-sm-3">{{ form.serv3(value="True", class="check", id="yourBox") }}</div>
+                <div class="col-sm-3"></div>
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                <p>Archivo de Configuración (CHIS):</p>
+                {{ form.config(class="uploader", id="yourText") }}
+                {% if form.config.errors %}
+                  {% for error in form.config.errors %}
+                    <p class="error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3">{{ form.submit(class = "botonderecho") }}</div>
+                <div class="col-sm-3"></div>
+            </div>
+
+            <script language="javascript">
+                document.getElementById('yourBox').onchange = function() {
+                    document.getElementById('yourText').disabled = !this.checked;
+                };
+            </script>
+
+        </form>
+    </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  </head>
+  <body>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <script>
+      function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+
+}
+    </script>
+
+  </body>
+</html>

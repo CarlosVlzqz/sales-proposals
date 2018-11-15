@@ -1,0 +1,252 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="topnav" id="myTopnav">
+    <a href=" {{ url_for('serv') }} " class="active">HW + Servicios</a>
+    <a href=" {{ url_for('sw') }} ">Software</a>
+    <a href=" {{ url_for('hw') }} ">Hardware</a>
+    <a href=" {{ url_for('index') }} ">Inicio</a>
+    <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+    <p>Asistente De Contratos</p>
+</div>
+
+<main>
+
+    <div class="container">
+
+        <h2>Información del Opportunity Owner</h2>
+
+        <form action="/serv" method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+                {{ form.nombre_vendedor(placeholder="Nombre") }}
+                {% if form.nombre_vendedor.errors %}
+                  {% for error in form.nombre_vendedor.errors %}
+                    <p class="error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.cargo_vendedor(placeholder="Cargo") }}
+                {% if form.cargo_vendedor.errors %}
+                  {% for error in form.cargo_vendedor.errors %}
+                    <p class="error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.mail_vendedor(placeholder="Mail") }}
+                {% if form.mail_vendedor.errors %}
+                  {% for error in form.mail_vendedor.errors %}
+                    <p class="error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.telefono_vendedor(placeholder="Teléfono") }}
+                {% if form.telefono_vendedor.errors %}
+                  {% for error in form.telefono_vendedor.errors %}
+                    <p class="error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+            <h2>Información del Cliente</h2>
+
+            <div class="form-group">
+                {{ form.razon_social(placeholder="Razon Social") }}
+                {% if form.razon_social.errors %}
+                  {% for error in form.razon_social.errors %}
+                    <p class="error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.cliente_corto(placeholder="Nombre Corto") }}
+                {% if form.cliente_corto.errors %}
+                  {% for error in form.cliente_corto.errors %}
+                    <p class="error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.contacto_cliente(placeholder="Nombre del Contacto") }}
+                {% if form.contacto_cliente.errors %}
+                  {% for error in form.contacto_cliente.errors %}
+                    <p class="error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.titulo_cliente(placeholder="Titulo del Contacto Con el Cliente") }}
+                {% if form.titulo_cliente.errors %}
+                  {% for error in form.titulo_cliente.errors %}
+                    <p class="error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+            <h2>Dirección del Cliente</h2>
+
+            <div class="form-group">
+                {{ form.estado_cliente(placeholder="Estado") }}
+                {% if form.estado_cliente.errors %}
+                  {% for error in form.estado_cliente.errors %}
+                    <p class="error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.ciudad_cliente(placeholder="Ciudad") }}
+                {% if form.ciudad_cliente.errors %}
+                  {% for error in form.ciudad_cliente.errors %}
+                    <p class="error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.colonia_cliente(placeholder="Colonia") }}
+                {% if form.colonia_cliente.errors %}
+                  {% for error in form.colonia_cliente.errors %}
+                    <p class="error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.calle_cliente(placeholder="Calle") }}
+                {% if form.calle_cliente.errors %}
+                  {% for error in form.calle_cliente.errors %}
+                    <p class="error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.numero_cliente(placeholder="Número") }}
+                {% if form.numero_cliente.errors %}
+                  {% for error in form.numero_cliente.errors %}
+                    <p class="error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.postalCliente(placeholder="Código Postal") }}
+                {% if form.postalCliente.errors %}
+                  {% for error in form.postalCliente.errors %}
+                    <p class="error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+            <h2>Información de la Propuesta/Contrato</h2>
+
+            <div class="form-group">
+                {{ form.titulo_contrato(placeholder="Nombre Del Proyecto") }}
+                {% if form.titulo_contrato.errors %}
+                  {% for error in form.titulo_contrato.errors %}
+                    <p class="error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.numero_propuesta(placeholder="Numero de Oportunidad") }}
+                {% if form.numero_propuesta.errors %}
+                  {% for error in form.numero_propuesta.errors %}
+                    <p class="error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.precio_numero(placeholder="Precio (Solo Numeros)") }}
+                {% if form.precio_numero.errors %}
+                  {% for error in form.precio_numero.errors %}
+                    <p class="error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.years_garantia(placeholder="Años de Garantía") }}
+                {% if form.years_garantia.errors %}
+                  {% for error in form.years_garantia.errors %}
+                    <p class="error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+            <p>Fecha Estimada de Emisión:</p>
+
+            <div class="form-group">
+              {{ form.fecha_contrato(type="date") }}
+              {% if form.fecha_contrato.errors %}
+                {% for error in form.fecha_contrato.errors %}
+                  <p class="error">{{ error }}</p>
+                {% endfor %}
+              {% endif %}
+            </div>
+
+            <p>Vigencia de la Propuesta:</p>
+
+            <div class="form-group">
+              {{ form.fecha_vigencia(type="date") }}
+              {% if form.fecha_vigencia.errors %}
+                {% for error in form.fecha_vigencia.errors %}
+                  <p class="error">{{ error }}</p>
+                {% endfor %}
+              {% endif %}
+            </div>
+
+            <p>Forma de Pago:</p>
+
+            <div class="form-group">
+              {{ form.OTC(type="radio") }}
+              {% if form.OTC.errors %}
+                {% for error in form.OTC.errors %}
+                  <p class="error">{{ error }}</p>
+                {% endfor %}
+              {% endif %}
+            </div>
+
+            <div class="form-group">
+                <p>Archivo de Configuración (txt):</p>
+                {{ form.config(class="uploader") }}
+                {% if form.config.errors %}
+                  {% for error in form.config.errors %}
+                    <p class="error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+            <!-- <hr>
+            <div class="form-group">
+                {{ form.to_addr(placeholder="Correo de Destino") }}
+                {% if form.to_addr.errors %}
+                {% for error in form.to_addr.errors %}
+                <p class="error">{{ error }}</p>
+                {% endfor %}
+                {% endif %}
+            </div> -->
+
+            {{ form.submit(class = "botonderecho") }}
+
+        </form>
+
+    </div>
+
+</main>
+
+{% endblock %}
