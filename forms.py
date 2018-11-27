@@ -22,6 +22,7 @@ class Hardware(Form):
     cliente_corto = StringField('Nombre Corto', validators=[DataRequired("Este campo es necesario")])
     contacto_cliente = StringField('Contacto Con El Cliente', validators=[DataRequired("Este campo es necesario")])
     titulo_cliente = StringField('Titulo del Cliente', validators=[DataRequired("Este campo es necesario")])
+    cargo_cliente = StringField('Titulo del Cliente', validators=[DataRequired("Este campo es necesario")])
     #Direccion
     estado_cliente = SelectField("Estado", choices = [(estado, estado) for estado in estados])
     ciudad_cliente = StringField(validators=[DataRequired("Este campo es necesario")])
@@ -35,7 +36,7 @@ class Hardware(Form):
     years_garantia = StringField(validators=[DataRequired("Este campo es necesario")])
     precio_numero = FloatField('Precio', validators=[DataRequired("Escribe solo números")])
     #Archivo de configuracion
-    config = FileField("Archivo de configuracion", validators=[FileRequired('Este campo es necesario'), FileAllowed(['txt'], 'Solo archivos txt')])
+    config = FileField("Archivo de configuracion", validators=[FileAllowed(['txt'], 'Solo archivos txt')])
     fecha_contrato = DateField(validators=[DataRequired("Este campo es necesario")])
     fecha_vigencia = DateField(validators=[DataRequired("Este campo es necesario")])
     #Correo
@@ -53,6 +54,7 @@ class Software(Form):
     cliente_corto = StringField('Nombre Corto', validators=[DataRequired("Este campo es necesario")])
     contacto_cliente = StringField('Contacto Con El Cliente', validators=[DataRequired("Este campo es necesario")])
     titulo_cliente = StringField('Titulo del Cliente', validators=[DataRequired("Este campo es necesario")])
+    cargo_cliente = StringField('Titulo del Cliente', validators=[DataRequired("Este campo es necesario")])
     #Direccion
     estado_cliente = SelectField("Estado", choices = [(estado, estado) for estado in estados])
     ciudad_cliente = StringField(validators=[DataRequired("Este campo es necesario")])
@@ -83,6 +85,7 @@ class Servicios(Form):
     cliente_corto = StringField('Nombre Corto', validators=[DataRequired("Este campo es necesario")])
     contacto_cliente = StringField('Contacto Con El Cliente', validators=[DataRequired("Este campo es necesario")])
     titulo_cliente = StringField('Titulo del Cliente', validators=[DataRequired("Este campo es necesario")])
+    cargo_cliente = StringField('Titulo del Cliente', validators=[DataRequired("Este campo es necesario")])
     #Direccion
     estado_cliente = SelectField("Estado", choices = [(estado, estado) for estado in estados])
     ciudad_cliente = StringField(validators=[DataRequired("Este campo es necesario")])
@@ -97,7 +100,7 @@ class Servicios(Form):
     precio_numero = FloatField('Precio', validators=[DataRequired("Escribe solo números")])
     OTC = RadioField('Forma de Pago', choices=[('OTC', 'Todo OTC'),('Mensual', 'Combinado (OTC - Mensual)')])
     #Archivo de configuracion
-    config = FileField("Archivo de configuracion", validators=[FileRequired('Este campo es necesario'), FileAllowed(['txt'], 'Solo archivos txt')])
+    config = FileField("Archivo de configuracion", validators=[FileAllowed(['txt'], 'Solo archivos txt')])
     fecha_contrato = DateField(validators=[DataRequired("Este campo es necesario")])
     fecha_vigencia = DateField(validators=[DataRequired("Este campo es necesario")])
     #Correo
@@ -108,5 +111,6 @@ class Checkboxes(Form):
      serv1 = BooleanField("Incluir servicios de LAB services", default="checked")
      serv2 = BooleanField("Incluir servicios profesionales de IBM", default="checked")
      serv3 = BooleanField("Incluir servicios de Mantenimiento", default="checked")
-     config = FileField("CHIS", validators=[FileRequired('Este campo es necesario'), FileAllowed(['docx'], 'Solo archivos txt')])
+     doc_transaccion = StringField()
+     config = FileField("CHIS", validators=[ FileAllowed(['docx', 'doc'], 'Solo archivos .doc o .docx')])
      submit = SubmitField('Enviar')

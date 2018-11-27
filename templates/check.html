@@ -43,6 +43,13 @@
 
             <br>
 
+            {{ form.doc_transaccion(placeholder="Número del Documento de Transacción", id="yourText2") }}
+            {% if form.doc_transaccion.errors %}
+            {% for error in form.doc_transaccion.errors %}
+            <p class="error">{{ error }}</p>
+            {% endfor %}
+            {% endif %}
+
             <div class="form-group">
                 <p>Archivo de Configuración (CHIS):</p>
                 {{ form.config(class="uploader", id="yourText") }}

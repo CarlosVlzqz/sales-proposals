@@ -232,6 +232,7 @@ def hw():
             numero_propuesta = form.numero_propuesta.data
             titulo_contrato = form.titulo_contrato.data
             te_equis_te = form.config.data
+            cargo_cliente = form.cargo_cliente.data
 
             if te_equis_te != None:
                 #Read the .txt file
@@ -302,8 +303,8 @@ def hw():
 
             #Keywords to be searched in the file
             palabras_clave = ["nombreVendedor", "cargoVendedor", "mailVendedor",
-                            "telefonoVendedor", "contactoCliente", "razonSocial",
-                            "clienteCorto", "estadoCliente", "ciudadCliente",
+                            "telefonoVendedor" , "contactoCliente", "razonSocial",
+                            "clienteCorto", "cargoCliente", "estadoCliente", "ciudadCliente",
                             "coloniaCliente", "calleCliente", "numeroCliente",
                             "postalCliente", "yearsGarantia", "tituloCliente",
                             "precioNumero", "precioLetra", "centavos",
@@ -314,7 +315,7 @@ def hw():
             # User's inputs
             los_sustitutos = [nombre_vendedor, cargo_vendedor, mail_vendedor,
                             telefono_vendedor, contacto_cliente, razon_social,
-                            cliente_corto, estado_cliente, ciudad_cliente,
+                            cliente_corto, cargo_cliente, estado_cliente, ciudad_cliente,
                             colonia_cliente, calle_cliente, numero_cliente,
                             postal_cliente, years_garantia, titulo_cliente,
                             precio_numero, precio_letra, centavos,
@@ -419,6 +420,7 @@ def sw():
             titulo_contrato = form.titulo_contrato.data
             to_addr = form.to_addr.data
             pe_de_efe = form.config.data
+            cargo_cliente = form.cargo_cliente.data
 
             table = doc.tables[0]
 
@@ -435,34 +437,68 @@ def sw():
 
                 row = 1
 
-                for i in range(len(parrafos)):
-                    print(parrafos[i].text[:3])
-                    if parrafos[i].text[:3] == f"00{row}":
-                        tabla_sw = doc.tables[0]
-                        try:
-                            tabla_sw.cell(row, 1).text = parrafos[i-1].text
-                            string = parrafos[i].text
-                            split = string.split()
-                            tabla_sw.cell(row, 0).text = split[1]
-                            tabla_sw.cell(row, 2).text = split[2]
-                            string = parrafos[i+1].text
-                            split = string.split(" - ")
-                            tabla_sw.cell(row, 3).text = split[0]
-                            tabla_sw.cell(row, 4).text = split[1]
-                            row += 1
-                        except IndexError:
-                            tabla_sw.add_row()
-                            tabla_sw.cell(row, 1).text = parrafos[i-1].text
-                            string = parrafos[i].text
-                            split = string.split()
-                            tabla_sw.cell(row, 0).text = split[1]
-                            tabla_sw.cell(row, 2).text = split[2]
-                            string = parrafos[i+1].text
-                            split = string.split(" - ")
-                            tabla_sw.cell(row, 3).text = split[0]
-                            tabla_sw.cell(row, 4).text = split[1]
-                            row += 1
-                        print(row)
+                try:
+
+                    for i in range(len(parrafos)):
+                        if parrafos[i].text[:3] == f"00{row}":
+                            tabla_sw = doc.tables[0]
+                            try:
+                                tabla_sw.cell(row, 1).text = parrafos[i-1].text
+                                string = parrafos[i].text
+                                split = string.split()
+                                tabla_sw.cell(row, 0).text = split[1]
+                                tabla_sw.cell(row, 2).text = split[2]
+                                string = parrafos[i+1].text
+                                split = string.split(" - ")
+                                tabla_sw.cell(row, 3).text = split[0]
+                                tabla_sw.cell(row, 4).text = split[1]
+                                row += 1
+                            except IndexError:
+                                tabla_sw.add_row()
+                                tabla_sw.cell(row, 1).text = parrafos[i-1].text
+                                string = parrafos[i].text
+                                split = string.split()
+                                tabla_sw.cell(row, 0).text = split[1]
+                                tabla_sw.cell(row, 2).text = split[2]
+                                string = parrafos[i+1].text
+                                split = string.split(" - ")
+                                tabla_sw.cell(row, 3).text = split[0]
+                                tabla_sw.cell(row, 4).text = split[1]
+                                row += 1
+
+                except UnboundLocalError:
+
+                    row = 1
+
+                    parrafos = list(pe_de_efe.paragraphs)
+
+                    for i in range(len(parrafos)):
+                        if f"00{row}" in parrafos[i].text:
+                            print(parrafos[i].text)
+                            tabla_sw = doc.tables[0]
+                            try:
+                                tabla_sw.cell(row, 1).text = parrafos[i-1].text
+                                string = parrafos[i].text
+                                split = string.split()
+                                tabla_sw.cell(row, 0).text = split[1]
+                                tabla_sw.cell(row, 2).text = split[2]
+                                string = parrafos[i+1].text
+                                split = string.split(" - ")
+                                tabla_sw.cell(row, 3).text = split[0]
+                                tabla_sw.cell(row, 4).text = split[1]
+                                row += 1
+                            except IndexError:
+                                tabla_sw.add_row()
+                                tabla_sw.cell(row, 1).text = parrafos[i-1].text
+                                string = parrafos[i].text
+                                split = string.split()
+                                tabla_sw.cell(row, 0).text = split[1]
+                                tabla_sw.cell(row, 2).text = split[2]
+                                string = parrafos[i+1].text
+                                split = string.split(" - ")
+                                tabla_sw.cell(row, 3).text = split[0]
+                                tabla_sw.cell(row, 4).text = split[1]
+                                row += 1
 
             else: 
                 pass
@@ -488,7 +524,7 @@ def sw():
 
             # Keywords to be searched in the template
             palabras_clave = ["nombreVendedor", "cargoVendedor", "mailVendedor",
-                            "telefonoVendedor", "contactoCliente", "razonSocial",
+                            "telefonoVendedor", "cargoCliente", "contactoCliente", "razonSocial",
                             "clienteCorto", "estadoCliente", "ciudadCliente",
                             "coloniaCliente", "calleCliente", "numeroCliente",
                             "postalCliente", "tituloCliente",
@@ -499,7 +535,7 @@ def sw():
 
             # Variables of the form
             los_sustitutos = [nombre_vendedor, cargo_vendedor, mail_vendedor,
-                            telefono_vendedor, contacto_cliente, razon_social,
+                            telefono_vendedor, cargo_cliente, contacto_cliente, razon_social,
                             cliente_corto, estado_cliente, ciudad_cliente,
                             colonia_cliente, calle_cliente, numero_cliente,
                             postal_cliente, titulo_cliente,
@@ -612,6 +648,7 @@ def serv():
             titulo_contrato = form.titulo_contrato.data
             # to_addr = form.to_addr.data
             te_equis_te = form.config.data
+            cargo_cliente = form.cargo_cliente.data
 
             # Validate config file's been uploaded
             if te_equis_te != None:
@@ -685,7 +722,7 @@ def serv():
 
             #Pablabras clave a buscar en el documento
             palabras_clave = ["nombreVendedor", "cargoVendedor", "mailVendedor",
-                            "telefonoVendedor", "contactoCliente", "razonSocial",
+                            "telefonoVendedor", "cargoCliente", "contactoCliente", "razonSocial",
                             "clienteCorto", "estadoCliente", "ciudadCliente",
                             "coloniaCliente", "calleCliente", "numeroCliente",
                             "postalCliente", "yearsGarantia", "tituloCliente",
@@ -695,7 +732,7 @@ def serv():
                             "numeroPropuesta", "tituloContrato"]
 
             los_sustitutos = [nombre_vendedor, cargo_vendedor, mail_vendedor,
-                            telefono_vendedor, contacto_cliente, razon_social,
+                            telefono_vendedor, cargo_cliente, contacto_cliente, razon_social,
                             cliente_corto, estado_cliente, ciudad_cliente,
                             colonia_cliente, calle_cliente, numero_cliente,
                             postal_cliente, years_garantia, titulo_cliente,
@@ -703,9 +740,6 @@ def serv():
                             dia_contrato, mes_contrato, year_contrato,
                             dia_vigencia, mes_vigencia, year_vigencia,
                             numero_propuesta.upper(), titulo_contrato]
-
-            for item in los_sustitutos:
-                print(item)
 
             # Replacing function call
             Reemplazador(doc, palabras_clave, los_sustitutos)
@@ -834,35 +868,54 @@ def check():
                 doc.add_paragraph()
                 i += 1
 
-            doc2 = Document(form.config.data)
+            if form.serv3.data == True:
 
-            estructura = []
+                doc.add_paragraph(f"Documento de Transacción Número: {form.doc_transaccion.data}")
+                doc.add_paragraph()
 
-            for block in iter_block_items(doc2):
-                if block.__class__.__name__ == "Paragraph":
-                    estructura.append("P")
-                else:
-                    estructura.append("T")
+                doc2 = Document(form.config.data)
 
-            tablas = 2
-            superavit = [4,7,2,2]
-            count = 0
+                estructura = []
 
-            for item in range(169, len(estructura), 1):
-                print(f"{item} - {estructura[item]}")
-                if estructura[item] == "P":
-                    try:
-                        doc.add_paragraph(doc2.paragraphs[item].text)
-                        print(doc2.paragraphs[item].text)
-                    except IndexError:
-                        pass
-                else:
-                    try:
-                        copy_table_after(doc2.tables[tablas], doc.paragraphs[len(doc.paragraphs)-superavit[count]])
-                    except IndexError:
-                        copy_table_after(doc2.tables[tablas], doc.paragraphs[len(doc.paragraphs)-1])
-                    tablas += 1
-                    count += 1
+                for block in iter_block_items(doc2):
+                    if block.__class__.__name__ == "Paragraph":
+                        estructura.append("P")
+                    else:
+                        estructura.append("T")
+
+                tablas = 2
+                count = 0
+
+                for item in range(169, len(estructura), 1):
+                    if estructura[item] == "P":
+                        try:
+                            doc.add_paragraph(doc2.paragraphs[item].text)
+                            print(doc2.paragraphs[item].text)
+                        except IndexError:
+                            pass
+                    else:
+                        try:
+                            copy_table_after(doc2.tables[tablas], doc.paragraphs[len(doc.paragraphs)-1])
+                        except IndexError:
+                            copy_table_after(doc2.tables[tablas], doc.paragraphs[len(doc.paragraphs)-1])
+                        tablas += 1
+                        count += 1
+
+            doc3 = Document("new_aa.docx")
+
+            paragraph = doc.add_paragraph(apartado_firmas[0])
+            paragraph.style = doc.styles["Heading 1"]
+            paragraph = doc.add_paragraph(apartado_firmas[1])
+            paragraph.style = doc.styles["Normal"]
+            paragraph = doc.add_paragraph(apartado_firmas[2])
+            paragraph.style = doc.styles["Normal"]
+            paragraph = doc.add_paragraph(apartado_firmas[3])
+            paragraph.style = doc.styles["Normal"]
+            paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            copy_table_after(doc3.tables[2], doc.paragraphs[len(doc.paragraphs)-2])
+
+            # Table replacing function
+            Tablas(doc, los_sustitutos, palabras_clave, True)
             
             doc.save("ContratoHW+S.docx")
 

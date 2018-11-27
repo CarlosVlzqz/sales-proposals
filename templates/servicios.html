@@ -93,6 +93,14 @@
                   {% endfor %}
                 {% endif %}
             </div>
+            <div class="form-group">
+                {{ form.cargo_cliente(placeholder="Cargo del Contacto Con el Cliente") }}
+                {% if form.cargo_cliente.errors %}
+                {% for error in form.cargo_cliente.errors %}
+                <p class="error">{{ error }}</p>
+                {% endfor %}
+                {% endif %}
+            </div>
 
             <h2>Dirección del Cliente</h2>
 
